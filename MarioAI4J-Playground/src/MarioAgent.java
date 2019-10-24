@@ -68,9 +68,28 @@ public class MarioAgent extends MarioHijackAIBase implements IAgent {
 		// ALWAYS RUN RIGHT
 		control.runRight();
 		
+		if(isMonsterInRange())
+			control.shoot();
+		
+		if(t.brick(1, 0)|| (mario.onGround && t.emptyTile(1, 1)) || e.danger(1, 0))
+			control.jump();
+		
 		// RETURN THE RESULT
 		return action;
 	}
+	
+	private boolean isMonsterInRange() {
+		for(int[] t : shootableRange) {
+			if(e.shootable(t[0], t[1]))
+				return true;
+		}
+		return false;
+	}
+	
+	private int[][] shootableRange = {
+			{1,0},{2,0},{3,0},
+			{2,1},{2,2},{3,2}
+	};
 	
 	public static void main(String[] args) {
 		// YOU MAY RAISE THE LOGGING LEVEL, even though there is probably no inforamation you need to know...
@@ -78,11 +97,13 @@ public class MarioAgent extends MarioHijackAIBase implements IAgent {
 		
 		// UNCOMMENT THE LINE OF THE LEVEL YOU WISH TO RUN
 		
-		LevelConfig level = LevelConfig.LEVEL_0_FLAT;
+		//LevelConfig level = LevelConfig.LEVEL_0_FLAT;
 		//LevelConfig level = LevelConfig.LEVEL_1_JUMPING;
-		//LevelConfig level = LevelConfig.LEVEL_2_GOOMBAS;
+		LevelConfig level = LevelConfig.LEVEL_2_GOOMBAS;
 		//LevelConfig level = LevelConfig.LEVEL_3_TUBES;
 		//LevelConfig level = LevelConfig.LEVEL_4_SPIKIES;
+		
+		
 		
 		// CREATE SIMULATOR
 		MarioSimulator simulator = new MarioSimulator(level.getOptions());

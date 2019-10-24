@@ -106,9 +106,9 @@ public class Evaluate {
 		// Change this seed to evaluate on different levels ~ it alters the procedural generation of level maps.
 		int masterSeed = 20;
 		
-		evaluateLevel(masterSeed, LevelConfig.LEVEL_0_FLAT);
+		//evaluateLevel(masterSeed, LevelConfig.LEVEL_0_FLAT);
 		//evaluateLevel(masterSeed, LevelConfig.LEVEL_1_JUMPING);
-		//evaluateLevel(masterSeed, LevelConfig.LEVEL_2_GOOMBAS);
+		evaluateLevel(masterSeed, LevelConfig.LEVEL_2_GOOMBAS);
 		//evaluateLevel(masterSeed, LevelConfig.LEVEL_3_TUBES);
 		//evaluateLevel(masterSeed, LevelConfig.LEVEL_4_SPIKIES);
 		
