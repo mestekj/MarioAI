@@ -108,8 +108,8 @@ public class Evaluate {
 		
 		//evaluateLevel(masterSeed, LevelConfig.LEVEL_0_FLAT);
 		//evaluateLevel(masterSeed, LevelConfig.LEVEL_1_JUMPING);
-		evaluateLevel(masterSeed, LevelConfig.LEVEL_2_GOOMBAS);
-		//evaluateLevel(masterSeed, LevelConfig.LEVEL_3_TUBES);
+		//evaluateLevel(masterSeed, LevelConfig.LEVEL_2_GOOMBAS);
+		evaluateLevel(masterSeed, LevelConfig.LEVEL_3_TUBES);
 		//evaluateLevel(masterSeed, LevelConfig.LEVEL_4_SPIKIES);
 		
 		//evaluateLevels(masterSeed, LevelConfig.LEVEL_0_FLAT, LevelConfig.LEVEL_1_JUMPING, LevelConfig.LEVEL_2_GOOMBAS);

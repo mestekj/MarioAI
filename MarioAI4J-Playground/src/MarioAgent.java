@@ -71,8 +71,25 @@ public class MarioAgent extends MarioHijackAIBase implements IAgent {
 		if(isMonsterInRange())
 			control.shoot();
 		
-		if(t.brick(1, 0)|| (mario.onGround && t.emptyTile(1, 1)) || e.danger(1, 0))
+		if(t.brick(1, 0)|| (mario.onGround && t.emptyTile(1, 1)) || enemyAhead())
 			control.jump();
+		
+		if(e.danger(1, -1) || e.danger(2, -2) 
+			 || e.danger(1, -2)
+				|| e.danger(2, -3)|| e.danger(2, -2)) {
+			control.runLeft();
+		}
+		
+		if(!mario.onGround)
+		{
+			//control landing position
+			if(isDangerUnder()) {
+				control.runLeft();
+				
+			}
+		}
+			
+			
 		
 		// RETURN THE RESULT
 		return action;
@@ -91,6 +108,25 @@ public class MarioAgent extends MarioHijackAIBase implements IAgent {
 			{2,1},{2,2},{3,2}
 	};
 	
+	private boolean enemyAhead() {
+		return
+				   e.danger(1, 0) || e.danger(1, -1) || e.danger(2, -2) 
+				|| e.danger(2, 0) || e.danger(1, -2)
+				|| e.danger(2, -3)|| e.danger(2, -2);
+	}
+	
+	private boolean isDangerUnder() {
+		for(int i = 0; i < 3; i++) {
+			if(realDanger(i+1,i) || (realDanger(i,i) && !e.squishy(i, i)))
+				return true;
+		}
+		return false;
+	}
+	
+	private boolean realDanger(int relMapX, int relMapY) {
+		return e.danger(relMapX, relMapY) && t.emptyTile(relMapX, relMapY);
+	}
+	
 	public static void main(String[] args) {
 		// YOU MAY RAISE THE LOGGING LEVEL, even though there is probably no inforamation you need to know...
 		//MarioLog.setLogLevel(Level.ALL);
@@ -99,8 +135,8 @@ public class MarioAgent extends MarioHijackAIBase implements IAgent {
 		
 		//LevelConfig level = LevelConfig.LEVEL_0_FLAT;
 		//LevelConfig level = LevelConfig.LEVEL_1_JUMPING;
-		LevelConfig level = LevelConfig.LEVEL_2_GOOMBAS;
-		//LevelConfig level = LevelConfig.LEVEL_3_TUBES;
+		//LevelConfig level = LevelConfig.LEVEL_2_GOOMBAS;
+		LevelConfig level = LevelConfig.LEVEL_3_TUBES;
 		//LevelConfig level = LevelConfig.LEVEL_4_SPIKIES;
 		
 		
